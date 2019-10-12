@@ -1,0 +1,35 @@
+﻿TrinitySettings 
+{
+	RootNamespace: InKnowWorks.TripleStoreMemoryCloud.Protocols.TSL;
+}
+
+struct TripleStatement
+{
+	string BaseUri;
+	string Subject;
+	string Predicate;
+	string Object;
+}
+
+struct StoreTripleRequest
+{
+	TripleStatement Triple;
+}
+
+struct StoreTripleResponse
+{
+	TripleStatement Triple;
+}
+
+// API - MakeTriple
+protocol StoreTriple
+{
+	Type: Syn;
+	Request: StoreTripleRequest;
+	Response: StoreTripleResponse;
+}
+
+module TripleStoreMemoryCloudServiceModule
+{
+	protocol StoreTriple;
+}

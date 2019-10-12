@@ -1,7 +1,27 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Communications.Messaging\RDF.TripleStore.OntologyServerAPI.tsl" />
+    <None Remove="Communications.Messaging\RDF.TripleStoreMemoryCloudServiceAPI.tsl" />
+    <None Remove="PropertyGraph.DataModelSchema\RDF.TripleStoreMemoryCloudGraph.tsl" />
+    <None Remove="PropertyGraph.DataModelSchema\SKOS.TripleStoreMemoryCloud.GraphDataModelSchema.tsl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphEngine.Core" Version="2.0.10059" />
+    <PackageReference Include="GraphEngine.DynamicCluster" Version="2.0.10059" />
+    <PackageReference Include="GraphEngine.LIKQ" Version="2.0.10059" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TslCodegen Include="Communications.Messaging\RDF.TripleStore.OntologyServerAPI.tsl" />
+    <TslCodegen Include="Communications.Messaging\RDF.TripleStoreMemoryCloudServiceAPI.tsl" />
+    <TslCodegen Include="PropertyGraph.DataModelSchema\RDF.TripleStoreMemoryCloudGraph.tsl" />
+    <TslCodegen Include="PropertyGraph.DataModelSchema\SKOS.TripleStoreMemoryCloud.GraphDataModelSchema.tsl" />
+  </ItemGroup>
 
 </Project>

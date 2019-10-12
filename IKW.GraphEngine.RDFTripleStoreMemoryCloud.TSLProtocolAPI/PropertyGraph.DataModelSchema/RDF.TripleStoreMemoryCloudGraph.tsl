@@ -1,0 +1,52 @@
+﻿// InKnowoWorks, Corp
+
+enum NodeType
+{
+	Blank,
+	Uri,
+	Literal,
+	GraphLiteral,
+	Variable
+}
+
+// Define Constant Values for the Parts of an RDF Triple
+
+enum TripleSegmentPart
+{
+	Subject,
+	Predicate,
+	Object
+}
+
+// Define the Node Interface 
+
+// TSL does support Type Inheritance so a node is a generic in that just need a CellId and a TSL Attribute
+
+struct INode
+{
+	NodeType TypeOfNode;
+	CellId   GraphParent;
+	string   GraphUri;	
+    long     HashCode;
+}
+
+// Define W3C Semantic Triple
+
+struct Triple
+{
+	INode SubjectNode;
+	INode PredicateNode;
+	INode ObjectNode;
+	string Url;
+	CellId GraphInstance;
+	long   HashCode;
+	List<INode> Nodes;
+}
+
+// Define a Grpah
+
+cell struct Graph
+{
+	string BaseUri;
+	List<Triple> TripleCollection;	
+}
