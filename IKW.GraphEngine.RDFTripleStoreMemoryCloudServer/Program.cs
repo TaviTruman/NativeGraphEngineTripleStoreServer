@@ -51,7 +51,39 @@ namespace IKW.GraphEngine.RDFTripleStoreMemoryCloudServer
                 TripleCollection = tripleCollection
             };
 
-            Global.LocalStorage.SaveGraph(myGraph);
+            Global.CloudStorage.SaveGraph(myGraph);
+
+            //int i = 0;
+
+            //while (true)
+            //{
+            //    var client = clientModule.Clients.FirstOrDefault();
+
+            //    Console.WriteLine($"{clientModule.Clients.Count()} clients");
+
+            //    // Test to see if Client has connected
+
+            //    if (client != null)
+            //    {
+            //        try
+            //        {
+            //            using (var msg = new S1Writer("foo", i++))
+            //                client.P1(msg).ContinueWith(t =>
+            //                {
+            //                    using (var rsp = t.Result)
+            //                    {
+            //                        Console.WriteLine($"Client responded: {rsp.foo}, {rsp.bar}");
+            //                    }
+            //                }, TaskContinuationOptions.RunContinuationsAsynchronously);
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            Console.WriteLine(ex.ToString());
+            //            --i;
+            //        }
+            //    }
+            //    Thread.Sleep(1000);
+            //}
 
             //var clientModule = server.GetCommunicationModule<TrinityClientModule>();
             //var tripleStoreServiceModule = server.GetCommunicationModule<TripleStoreServiceModule>();

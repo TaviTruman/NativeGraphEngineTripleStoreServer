@@ -27,7 +27,11 @@ namespace IKW.GraphEngine.RDFTripleStoreMemoryCloudClient
 
             var clientModuleInstance = clientModule.Clients;
 
-            client.StoreTriple(new StoreTripleRequestWriter(new TripleStatement()
+            //client.P1(new S1Writer("Test", 100));
+
+            var tctm = Global.CloudStorage.GetCommunicationModule<TripleStoreServiceModule>();
+
+            tctm?.StoreTriple(0, new StoreTripleRequestWriter(new TripleStatement()
             {
                 BaseUri = @"http:\\www.inknowworks.semanticweb\ontology",
                 Subject = "GraphEngine",
