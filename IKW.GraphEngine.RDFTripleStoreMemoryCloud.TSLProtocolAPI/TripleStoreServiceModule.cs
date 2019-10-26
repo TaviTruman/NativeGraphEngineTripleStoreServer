@@ -15,9 +15,19 @@ namespace IKW.GraphEngine.RDFTripleStoreMemoryCloud.TSLProtocolAPI
 
         public override void StoreTripleHandler(StoreTripleRequestReader request, StoreTripleResponseWriter response)
         {
-            Console.WriteLine($"StoreTripleHandler reached: CellId: { request.m_cellId}, Triple.Subject-Node: { request.Triple.Subject}");
-            Log.WriteLine("Hello");
+            Console.WriteLine($"StoreTripleHandler reached: CellId: { request.m_cellId}, " +
+                              $"Triple.Subject-Node: {request.Triple.Subject}");
 
+            response = new StoreTripleResponseWriter(request.Triple);
+
+        }
+
+        public override void StoreTripleAsyncHandler(StoreTripleRequestReader request, StoreTripleResponseWriter response)
+        {
+            Console.WriteLine($"StoreTripleAsyncHandler reached: CellId: { request.m_cellId}, " +
+                              $"Triple.Subject-Node: {request.Triple.Subject}");
+
+            response = new StoreTripleResponseWriter(request.Triple);
         }
     }
 }

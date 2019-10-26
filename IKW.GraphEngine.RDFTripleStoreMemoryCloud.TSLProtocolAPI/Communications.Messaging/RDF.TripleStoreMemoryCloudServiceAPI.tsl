@@ -29,7 +29,15 @@ protocol StoreTriple
 	Response: StoreTripleResponse;
 }
 
+protocol StoreTripleAsync
+{
+	Type: Asyn;
+	Request: StoreTripleRequest;
+	Response: StoreTripleResponse;
+}
+
 module TripleStoreMemoryCloudServiceModule
 {
 	protocol StoreTriple;
+	protocol StoreTripleAsync;
 }

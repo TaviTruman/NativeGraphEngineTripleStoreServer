@@ -20,19 +20,24 @@ enum TripleSegmentPart
 
 // Define the Node Interface 
 
-// TSL does support Type Inheritance so a node is a generic in that just need a CellId and a TSL Attribute
+// TSL does not support Type Inheritance so a node is a generic in that just need a CellId and a TSL Attribute
 
-struct INode
+cell struct INode
 {
+  [NodeType]	
 	NodeType TypeOfNode;
-	CellId   GraphParent;
-	string   GraphUri;	
-    long     HashCode;
+	[TypeOfTriple]
+  TripleSegmentPart TripleType;
+	[GraphParent]
+	CellId  GraphParent;  // We can use the Generic Cell 
+	string  GraphUri;	
+	[index]
+  long    HashCode;
 }
 
 // Define W3C Semantic Triple
 
-struct Triple
+cell struct Triple
 {
 	INode SubjectNode;
 	INode PredicateNode;

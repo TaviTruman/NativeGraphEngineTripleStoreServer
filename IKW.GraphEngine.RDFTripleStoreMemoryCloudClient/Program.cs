@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using IKW.GraphEngine.RDFTripleStoreMemoryCloud.TSLProtocolAPI;
 using Trinity.Client;
 using InKnowWorks.TripleStoreMemoryCloud.Protocols.TSL;
@@ -14,7 +15,7 @@ namespace IKW.GraphEngine.RDFTripleStoreMemoryCloudClient
     {
         private static TrinityClient client; 
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             LoggingLevel = Trinity.Diagnostics.LogLevel.Debug;
             client       = new TrinityClient("localhost:5304");
@@ -27,20 +28,33 @@ namespace IKW.GraphEngine.RDFTripleStoreMemoryCloudClient
 
             var clientModuleInstance = clientModule.Clients;
 
-            //client.P1(new S1Writer("Test", 100));
-
             var tctm = Global.CloudStorage.GetCommunicationModule<TripleStoreServiceModule>();
 
-            tctm?.StoreTriple(0, new StoreTripleRequestWriter(new TripleStatement()
+            while (true)
             {
-                BaseUri = @"http:\\www.inknowworks.semanticweb\ontology",
-                Subject = "GraphEngine",
-                Predicate = "IsAwesome",
-                Object = "DataManagementSystem"
-            }));
+                try
+                {
+                    var tripleStatement = new TripleStatement()
+                    {
+                        BaseUri = @"http:\\www.inknowworks.semanticweb\ontology",
+                        Subject = "GraphEngine",
+                        Predicate = "IsAwesome",
+                        Object = "DataManagementSystem"
+                    };
 
+                    using (var message = new StoreTripleRequestWriter(tripleStatement))
+                    using (var rsp = client.StoreTriple(message))
+                    {
+                        if (rsp != null) Console.WriteLine($"Server responses with rsp code={rsp.Triple.BaseUri}");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
 
-            while (true) Thread.Sleep(1000000);
+                await Task.Delay(1000);
+            }
         }
     }
 }
